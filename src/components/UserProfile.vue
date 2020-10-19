@@ -8,6 +8,18 @@
                 <strong>Followers:</strong>{{followers}}
             </div>
             <button @click="chgstate()">Do Admin</button>
+            <form class="user-profile__create-twoot">
+                <label for="newTwoot"><strong>New Twoot:</strong></label>
+                <textarea id="newTwoot" rows="4"/>
+                <label for="newTwootType"><strong>Type:</strong></label>
+                <select id="newTwootType">
+                    <option
+                        :value="tt.value"
+                        v-for="tt in twoottype"
+                        v-bind:key="tt.value"
+                    >{{tt.name}}</option>
+                </select>
+            </form>
         </div>
         <div class="user-profile__twoots-wrapper">
             <TwootItem
@@ -31,6 +43,10 @@ export default {
     components: {TwootItem},
     data(){
         return {
+            twoottype : [
+                {value: 'draft', name: 'Draft'},
+                {value: 'instant', name: 'Instant'}
+            ],
             followers : 0,
             user : {
                 username : "mamatias",
@@ -114,5 +130,15 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+    }
+
+    .user-profile__create-twoot {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-profile__create-twoot label {
+        padding-top: 10px;
+        color: rgb(27, 36, 25);
     }
 </style>
